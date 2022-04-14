@@ -1,71 +1,72 @@
-// document.querySelector("#play").addEventListener("click", function() {
-// 	console.log("Play Video");
-// });
-
 var video = document.querySelector("#player1")
 
 window.addEventListener("load", function() {
 	console.log("Good job opening the window")
-	video.autoplay = false
-	video.loop = false
+	video.autoplay = false;
+	video.loop = false;
 });
 
 document.querySelector("#play").addEventListener("click", function() {
 	console.log("Play Video");
-	video.play()
-	document.querySelector("#volume").innerHTML = video.volume * 100 + "%"
+	video.play();
+	document.querySelector("#volume").innerHTML = video.volume*100 + "%";
 });
 
 document.querySelector("#pause").addEventListener("click", function() {
 	console.log("Pause Video");
-	video.pause()
+	video.pause();
 });
 
 document.querySelector("#slower").addEventListener("click", function() {
-	video.playbackRate *= 0.95
-	console.log("Now the speed is " + video.playbackRate) 
+	console.log("Slower Video");
+	video.playbackRate *= 0.95;
+	console.log("The speed of the video is", video.playbackRate);
 });
 
 document.querySelector("#faster").addEventListener("click", function() {
-	video.playbackRate /= 0.95
-	console.log("Now the speed is " + video.playbackRate) 
+	console.log("Faster Video");
+	video.playbackRate /= 0.95;
+	console.log("The speed of the video is", video.playbackRate);
 });
 
 document.querySelector("#skip").addEventListener("click", function() {
-	console.log("Original location " + video.currentTime) 
-	if (video.currentTime + 15 > video.duration){
-		console.log("Go back to the beginning")
-		video.currentTime = 0 
-		console.log("New location 0") 
+	console.log("Original location ", video.currentTime);
+	console.log("Skip 15 seconds");
+	video.currentTime += 15;
+	if (video.currentTime >= video.duration) {
+		video.currentTime = 0;
 	}
-	else{
-		video.currentTime += 15
-		console.log("New location " + video.currentTime) 
-	}
+	console.log("The current location of the video is", video.currentTime);
 });
 
 document.querySelector("#mute").addEventListener("click", function() {
-	console.log("The value of mute is " + video.muted) 
-	if (video.muted){
-		video.muted = false
-		document.querySelector("#mute").innerHTML = "Mute"
-	}
-	else{
-		video.muted = true
-		document.querySelector("#mute").innerHTML = "Unmute"
+	console.log("Mute Video");
+	if (video.muted === true) {
+		video.muted = false;
+		console.log("Unmuted the Video");
+		this.innerHTML = "Mute";
+	} else {
+		video.muted = true;
+		console.log("Muted the Video");
+		this.innerHTML = "Unmute";
 	}
 });
 
 document.querySelector("#slider").addEventListener("click", function() {
-	console.log(this.value) 
-	video.volume = this.value * 0.01
-	document.querySelector("#volume").innerHTML = this.value + "%"
+	console.log("The current volume is", this.value);
+	video.volume = this.value / 100;
+	// document.querySelector("#volume").innerHTML = this.value + "%"
+	document.querySelector("#volume").innerHTML = video.volume * 100 + "%";
 });
 
 document.querySelector("#vintage").addEventListener("click", function() {
-	document.getElementById("player1").classList.add("oldSchool");
+	// document.getElementById("player1").classList.add("oldSchool");
+	// console.log("Add filter");
+	video.classList.add("oldSchool");
 });
 
 document.querySelector("#orig").addEventListener("click", function() {
-	document.getElementById("player1").classList.remove("oldSchool");
+	// document.getElementById("player1").classList.remove("oldSchool");
+	// console.log("Remove filter");
+	video.classList.remove("oldSchool");
 });
